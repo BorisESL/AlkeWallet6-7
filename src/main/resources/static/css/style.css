@@ -1,0 +1,241 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header .cero:hover {
+
+    text-shadow: 0 0 10px rgba(255, 255, 255, 1.1);
+    transform: scale(1.1);
+}
+
+header .uno:hover {
+
+    text-shadow: 0 0 10px rgba(255, 255, 255, 1.1);
+    transform: scale(1.1);
+}
+
+header .dos:hover {
+
+    text-shadow: 0 0 10px rgba(255, 255, 255, 1.1);
+    transform: scale(1.1);
+}
+
+header .tres:hover {
+
+    text-shadow: 0 0 10px rgba(255, 255, 255, 1.1);
+    transform: scale(1.1);
+}
+
+header .cuatro:hover {
+
+    text-shadow: 0 0 10px rgba(255, 255, 255, 1.1);
+    transform: scale(1.1);
+}
+
+header .cinco:hover {
+
+    text-shadow: 0 0 10px rgba(255, 255, 255, 1.1);
+    transform: scale(1.1);
+}
+
+
+.img-fluid {
+    animation: fade-in-right .6s cubic-bezier(.39, .575, .565, 1.000) both
+
+}
+
+.logotipo {
+
+    animation: rotar 5s linear infinite;
+}
+
+img:hover {
+
+    cursor: pointer;
+}
+
+@keyframes rotar {
+    from {
+        transform: rotateY(180deg);
+    }
+    to {
+        transform: rotateY(-180deg);
+    }
+}
+
+@keyframes fade-in-right {
+    0% {
+        transform: translateX(50px);
+        opacity: 0
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1
+    }
+}
+
+.jumbo {
+    -webkit-animation: fade-in-left .6s cubic-bezier(.39, .575, .565, 1.000) both;
+    animation: fade-in-left .6s cubic-bezier(.39, .575, .565, 1.000) both
+}
+
+@-webkit-keyframes fade-in-left {
+    0% {
+        -webkit-transform: translateX(-50px);
+        transform: translateX(-50px);
+        opacity: 0
+    }
+
+    100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+        opacity: 1
+    }
+}
+
+@keyframes fade-in-left {
+    0% {
+        -webkit-transform: translateX(-50px);
+        transform: translateX(-50px);
+        opacity: 0
+    }
+
+    100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+        opacity: 1
+    }
+}
+
+.formulario {
+    animation: slide-up-from-bottom 0.6s cubic-bezier(0.39, 0.575, 0.565, 1.000) both;
+}
+
+@keyframes slide-up-from-bottom {
+    0% {
+        transform: translateY(100px);
+        /* Inicia desde una posición baja */
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+.texto-medio {
+    color: #ffffffc4;
+    font-family: 'DM Serif Display', serif;
+
+}
+
+.redes {
+    font-size: 2rem;
+}
+
+.redes a {
+    margin-right: 20px;
+    color: black;
+}
+
+.redes .fb:hover {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    transform: scale(1.4);
+}
+
+.redes .tw:hover {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    transform: scale(1.4);
+}
+
+.redes .inta:hover {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    transform: scale(1.4);
+}
+
+.redes .lin:hover {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    transform: scale(1.4);
+}
+
+.bi {
+    color: #e3e3e6;
+}
+
+.container p {
+    color: rgb(201, 188, 50);
+}
+
+h1 {
+    color: rgb(201, 188, 50);
+}
+
+/* Estilo para el hr */
+hr {
+    border: 0;
+    height: 3px;
+    background-color: rgb(201, 188, 50);
+}
+
+.container {
+    min-height: 100vh;
+    /********garantiza el 100 de altura***********/
+}
+
+.logo-navbar {
+    width: 150px;
+    /* Ajusta el tamaño según tus necesidades */
+    height: auto;
+    /* Mantiene la proporción original */
+}
+
+.formulario {
+    max-width: 400px;
+    margin: 0 auto;
+
+}
+
+.formulario2 {
+    margin: 0 auto;
+    border: 2px solid yellow;
+    border-radius: 1rem;
+    padding: 100px;
+
+}
+
+.formulario3 {
+    max-width: 400px;
+    margin: 0 auto;
+    border: 2px solid yellow;
+    border-radius: 1rem;
+    padding: 100px;
+
+}
+
+.formulario4 {
+    max-width: 980px;
+    margin: 0 auto;
+    border: 2px solid yellow;
+    border-radius: 1rem;
+    padding: 100px;
+}
+
+.formulario5 {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 100px;
+}
+
+footer {
+    flex-wrap: wrap;
+    background-color: #e3e3e6;
+    padding: 50px;
+    display: flex;
+    justify-content: space-around;
+}
+
