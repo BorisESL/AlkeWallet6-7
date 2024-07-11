@@ -6,10 +6,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 
 import java.util.Optional;
 
@@ -25,7 +25,7 @@ public class MiController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String email, @RequestParam String password, HttpServletRequest request) {
+    public String login(@RequestParam String email, @RequestParam String password, HttpServletRequest request, Model model) {
         Optional<Usuario> usuarioOpt = usuarioRepository.findByEmail(email);
 
         if (usuarioOpt.isPresent() && usuarioOpt.get().getPassword().equals(password)) {
@@ -38,8 +38,17 @@ public class MiController {
     }
 
     @GetMapping("/menuprincipal")
-    public String menuprincipal() {
-        return "menuprincipal";
+    public String menuprincipal(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+
+        if (usuario != null) {
+            model.addAttribute("nombre", usuario.getNombre());
+            model.addAttribute("balance", usuario.getBalance());
+            return "menuprincipal";
+        } else {
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/depositarfondos")

@@ -1,86 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Menú Principal</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body style="background: black;">
-
-  <header>
-    <nav class="navbar navbar-expand-lg bg-black navbar-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="index.html">
-          <img src="/img/banco.png" alt="Logo" width="100" height="74"
-               class="d-inline-block align-text-top logo-navbar">
-        </a>
-        <a class="cero navbar-brand text-warning" href="index.html">Alke Wallet</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup" data-bs-target="#navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="uno nav-link active text-warning" aria-current="page" href="/menuprincipal.html">Menú principal</a>
-            <a class="dos nav-link active text-warning" aria-current="page" href="/depositarfondos.html">Depósito</a>
-            <a class="tres nav-link active text-warning" aria-current="page" href="/retirarfondos.html">Transferencia</a>
-            <a class="cuatro nav-link active text-warning" aria-current="page" href="/ulimosmov.html">Últimos movimientos</a>
-            <a class="cinco nav-link active text-warning" aria-current="page" href="/index.html">Cerrar sesión</a>
-          </div>
-        </div>
-      </div>
-    </nav>
-  </header>
-
-  <main class="container-fluid mt-5">
-    <div class="formulario2 d-flex flex-column justify-content-center text-white">
-      <h1 class="text-secondary text-md-center p-2">Menú Principal</h1>
-      <div class="form-group text-center">
-        <label class="text-secondary" for="balance">Dinero en cuenta:</label>
-        <h2 class="text-md-center">$60000</h2>
-      </div>
-      <div class="row">
-        <div class="col-12 mb-3">
-          <a href="/depositarfondos.html" class="btn btn-dark text-warning w-100 ">Depósito</a>
+<header>
+  <nav class="navbar navbar-expand-lg bg-black navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/"><img src="/img/banco.png" alt="Logo" width="100" height="74"
+                                            class="d-inline-block align-text-top logo-navbar"></a>
+      <a class="cero navbar-brand text-warning" href="/">Alke Wallet</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="uno nav-link active text-warning" aria-current="page" href="menuprincipal.html">Menú principal</a>
+          <a class="dos nav-link active text-warning" aria-current="page" href="depositarfondos.html">Depósito</a>
+          <a class="tres nav-link active text-warning" aria-current="page" href="retirarfondos.html">Transferencia</a>
+          <a class="cuatro nav-link active text-warning" aria-current="page" href="ultimosmov.html">Últimos movimientos</a>
+          <a class="cinco nav-link active text-warning" aria-current="page" href="index.html">Cerrar sesión</a>
         </div>
       </div>
     </div>
-  </main>
+  </nav>
+</header>
 
+<main class="container-fluid mt-5">
+  <div class="formulario2 d-flex flex-column justify-content-center text-white">
+    <h1 class="text-secondary text-md-center p-2">Menú Principal</h1>
+    <div class="form-group text-center">
+      <label class="text-secondary" for="nombre">Bienvenido, <span th:text="${nombre}">Nombre</span></label>
+    </div>
+    <div class="form-group text-center">
+      <label class="text-secondary" for="balance">Dinero en cuenta:</label>
+      <h2 class="text-md-center">$<span th:text="${balance}">0</span></h2>
+    </div>
+    <div class="row">
+      <div class="col-12 mb-3">
+        <a href="depositarfondos.html" class="btn btn-dark text-warning w-100">Depósito</a>
+      </div>
+    </div>
+  </div>
+</main>
 
-  <footer class="mt-5" style="background-color: black;">
-    <div class="copy">
-      <p class="parrafo text-warning mt-4">©COPYRIGHT_2024</p>
-    </div>
-    <div class="redes">
-      <a class="fb" href="https://web.facebook.com/" target="_blank">
-        <i class="bi bi-facebook text-warning"></i></a>
-      <a class="tw" href="https://twitter.com/" target="_blank">
-        <i class="bi bi-twitter-x text-warning"></i></a>
-      <a class="inta" href="https://www.instagram.com/" target="_blank">
-        <i class="bi bi-instagram text-warning"></i></a>
-      <a class="lin" href="https://www.linkedin.com/" target="_blank">
-        <i class="bi bi-linkedin text-warning"></i></a>
-    </div>
-  </footer>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-          crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="/js/script.js"></script>
+<footer class="mt-5" style="background-color: black;">
+  <div class="copy">
+    <p class="parrafo text-warning mt-4">©COPYRIGHT_2024</p>
+  </div>
+  <div class="redes">
+    <a class="fb" href="https://web.facebook.com/" target="_blank">
+      <i class="bi bi-facebook text-warning"></i></a>
+    <a class="tw" href="https://twitter.com/" target="_blank">
+      <i class="bi bi-twitter-x text-warning"></i></a>
+    <a class="inta" href="https://www.instagram.com/" target="_blank">
+      <i class="bi bi-instagram text-warning"></i></a>
+    <a class="lin" href="https://www.linkedin.com/" target="_blank">
+      <i class="bi bi-linkedin text-warning"></i></a>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/js/script.js"></script>
 </body>
-
 </html>
