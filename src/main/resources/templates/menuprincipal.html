@@ -15,20 +15,20 @@
 <header>
   <nav class="navbar navbar-expand-lg bg-black navbar-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/"><img src="/img/banco.png" alt="Logo" width="100" height="74"
-                                            class="d-inline-block align-text-top logo-navbar"></a>
-      <a class="cero navbar-brand text-warning" href="/">Alke Wallet</a>
+      <a class="navbar-brand" th:href="@{/}"><img src="/img/banco.png" alt="Logo" width="100" height="74"
+                                                  class="d-inline-block align-text-top logo-navbar"></a>
+      <a class="cero navbar-brand text-warning" th:href="@{/}">Alke Wallet</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
               aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="uno nav-link active text-warning" aria-current="page" href="menuprincipal.html">Menú principal</a>
-          <a class="dos nav-link active text-warning" aria-current="page" href="depositarfondos.html">Depósito</a>
-          <a class="tres nav-link active text-warning" aria-current="page" href="retirarfondos.html">Transferencia</a>
-          <a class="cuatro nav-link active text-warning" aria-current="page" href="ultimosmov.html">Últimos movimientos</a>
-          <a class="cinco nav-link active text-warning" aria-current="page" href="index.html">Cerrar sesión</a>
+          <a class="uno nav-link active text-warning" aria-current="page" th:href="@{/menuprincipal}">Menú principal</a>
+          <a class="dos nav-link active text-warning" aria-current="page" th:href="@{/depositarfondos}">Depósito</a>
+          <a class="tres nav-link active text-warning" aria-current="page" th:href="@{/retirarfondos}">Retirar Fondos</a>
+          <a class="cuatro nav-link active text-warning" aria-current="page" th:href="@{/ultimosmov}">Últimos movimientos</a>
+          <a class="cinco nav-link active text-warning" aria-current="page" th:href="@{/logout}">Cerrar sesión</a>
         </div>
       </div>
     </div>
@@ -37,9 +37,9 @@
 
 <main class="container-fluid mt-5">
   <div class="formulario2 d-flex flex-column justify-content-center text-white">
-    <h1 class="text-secondary text-md-center p-2">Menú Principal</h1>
+    <h1 class="text-md-center p-2">Menú Principal</h1>
     <div class="form-group text-center">
-      <label class="text-secondary" for="nombre">Bienvenido, <span th:text="${nombre}">Nombre</span></label>
+      <label class="bienvenida" for="nombre">Bienvenido, <span th:text="${nombre}">Nombre</span></label>
     </div>
     <div class="form-group text-center">
       <label class="text-secondary" for="balance">Dinero en cuenta:</label>
@@ -47,7 +47,7 @@
     </div>
     <div class="row">
       <div class="col-12 mb-3">
-        <a href="depositarfondos.html" class="btn btn-dark text-warning w-100">Depósito</a>
+        <a th:href="@{/depositarfondos}" class="btn btn-dark text-warning w-100">Depósito</a>
       </div>
     </div>
   </div>

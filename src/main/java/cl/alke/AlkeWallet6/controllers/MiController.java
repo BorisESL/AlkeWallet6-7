@@ -52,18 +52,42 @@ public class MiController {
     }
 
     @GetMapping("/depositarfondos")
-    public String depositarfondos() {
-        return "depositarfondos";
+    public String depositarfondos(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+
+        if (usuario != null) {
+            model.addAttribute("nombre", usuario.getNombre());
+            return "depositarfondos";
+        } else {
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/retirarfondos")
-    public String retirarfondos() {
-        return "retirarfondos";
+    public String retirarfondos(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+
+        if (usuario != null) {
+            model.addAttribute("nombre", usuario.getNombre());
+            return "retirarfondos";
+        } else {
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/ultimosmov")
-    public String ultimosmov() {
-        return "ultimosmov";
+    public String ultimosmov(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+
+        if (usuario != null) {
+            model.addAttribute("nombre", usuario.getNombre());
+            return "ultimosmov";
+        } else {
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/logout")

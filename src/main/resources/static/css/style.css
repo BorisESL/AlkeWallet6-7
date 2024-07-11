@@ -172,7 +172,11 @@ img:hover {
 }
 
 h1 {
-    color: rgb(201, 188, 50);
+    color: #C0C0C0;
+}
+
+.bienvenida {
+    color: #C0C0C0;
 }
 
 /* Estilo para el hr */
@@ -202,7 +206,7 @@ hr {
 
 .formulario2 {
     margin: 0 auto;
-    border: 2px solid yellow;
+    border: 2px solid rgba(255, 193,7);
     border-radius: 1rem;
     padding: 100px;
 
