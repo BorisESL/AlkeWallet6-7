@@ -1,6 +1,8 @@
 package cl.alke.AlkeWallet6.controllers;
 
+import cl.alke.AlkeWallet6.models.Movimiento;
 import cl.alke.AlkeWallet6.models.Usuario;
+import cl.alke.AlkeWallet6.repositories.MovimientoRepository;
 import cl.alke.AlkeWallet6.repositories.UsuarioRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -18,6 +21,9 @@ public class MiController {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private MovimientoRepository movimientoRepository;
 
     @GetMapping("/")
     public String index() {
@@ -38,7 +44,7 @@ public class MiController {
     }
 
     @GetMapping("/menuprincipal")
-    public String menuprincipal(HttpServletRequest request, Model model) {
+    public String menuPrincipal(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         Usuario usuario = (Usuario) session.getAttribute("usuario");
 
@@ -52,38 +58,117 @@ public class MiController {
     }
 
     @GetMapping("/depositarfondos")
-    public String depositarfondos(HttpServletRequest request, Model model) {
+    public String depositarFondos() {
+        return "depositarfondos";
+    }
+
+    @PostMapping("/depositarfondos")
+    public String depositarFondos(HttpServletRequest request, @RequestParam double monto, Model model) {
         HttpSession session = request.getSession();
         Usuario usuario = (Usuario) session.getAttribute("usuario");
 
         if (usuario != null) {
+            // Actualizar el balance del usuario
+            usuario.setBalance((int) (usuario.getBalance() + monto));
+            usuarioRepository.save(usuario);
+
+            // Actualizar el balance en la sesión
+            session.setAttribute("usuario", usuario);
             model.addAttribute("nombre", usuario.getNombre());
-            return "depositarfondos";
+            model.addAttribute("balance", usuario.getBalance());
+
+            return "redirect:/menuprincipal";
         } else {
             return "redirect:/";
         }
     }
 
     @GetMapping("/retirarfondos")
-    public String retirarfondos(HttpServletRequest request, Model model) {
+    public String retirarFondos() {
+        return "retirarfondos";
+    }
+
+    @PostMapping("/retirarfondos")
+    public String retirarFondos(HttpServletRequest request, @RequestParam double monto, Model model) {
         HttpSession session = request.getSession();
         Usuario usuario = (Usuario) session.getAttribute("usuario");
 
         if (usuario != null) {
-            model.addAttribute("nombre", usuario.getNombre());
-            return "retirarfondos";
+            if (usuario.getBalance() >= monto) {
+                // Actualizar el balance del usuario
+                usuario.setBalance((int) (usuario.getBalance() - monto));
+                usuarioRepository.save(usuario);
+
+                // Actualizar el balance en la sesión
+                session.setAttribute("usuario", usuario);
+                model.addAttribute("nombre", usuario.getNombre());
+                model.addAttribute("balance", usuario.getBalance());
+
+                return "redirect:/menuprincipal";
+            } else {
+                // Manejar el caso cuando no hay suficiente balance
+                model.addAttribute("error", "No tienes suficiente balance para retirar.");
+                return "retirarfondos";
+            }
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    @GetMapping("/realizarTransferencia")
+    public String realizarTransferencia() {
+        return "transferencia";
+    }
+
+    @PostMapping("/realizarTransferencia")
+    public String realizarTransferencia(HttpServletRequest request, @RequestParam double monto, @RequestParam String contacto, Model model) {
+        HttpSession session = request.getSession();
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+
+        if (usuario != null) {
+            Optional<Usuario> destinatarioOpt = usuarioRepository.findByEmail(contacto);
+
+            if (destinatarioOpt.isPresent()) {
+                Usuario destinatario = destinatarioOpt.get();
+
+                if (usuario.getBalance() >= monto) {
+                    // Actualizar el balance del usuario
+                    usuario.setBalance((int) (usuario.getBalance() - monto));
+                    usuarioRepository.save(usuario);
+
+                    // Actualizar el balance del destinatario
+                    destinatario.setBalance((int) (destinatario.getBalance() + monto));
+                    usuarioRepository.save(destinatario);
+
+                    // Actualizar la sesión del usuario
+                    session.setAttribute("usuario", usuario);
+                    model.addAttribute("nombre", usuario.getNombre());
+                    model.addAttribute("balance", usuario.getBalance());
+
+                    return "redirect:/menuprincipal";
+                } else {
+                    // Manejar el caso cuando no hay suficiente balance
+                    model.addAttribute("error", "No tienes suficiente balance para realizar la transferencia.");
+                    return "transferencia";
+                }
+            } else {
+                // Manejar el caso cuando el destinatario no se encuentra
+                model.addAttribute("error", "El contacto no se encuentra.");
+                return "transferencia";
+            }
         } else {
             return "redirect:/";
         }
     }
 
     @GetMapping("/ultimosmov")
-    public String ultimosmov(HttpServletRequest request, Model model) {
+    public String ultimosMovimientos(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         Usuario usuario = (Usuario) session.getAttribute("usuario");
 
         if (usuario != null) {
-            model.addAttribute("nombre", usuario.getNombre());
+            List<Movimiento> movimientos = movimientoRepository.findByUsuario(usuario);
+            model.addAttribute("movimientos", movimientos);
             return "ultimosmov";
         } else {
             return "redirect:/";
