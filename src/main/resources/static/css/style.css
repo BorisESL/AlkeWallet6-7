@@ -34,6 +34,12 @@ header .cuatro:hover {
     transform: scale(1.1);
 }
 
+header .cuatros:hover {
+
+    text-shadow: 0 0 10px rgba(255, 255, 255, 1.1);
+    transform: scale(1.1);
+}
+
 header .cinco:hover {
 
     text-shadow: 0 0 10px rgba(255, 255, 255, 1.1);
