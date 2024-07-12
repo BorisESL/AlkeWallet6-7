@@ -72,6 +72,13 @@ public class MiController {
             usuario.setBalance((int) (usuario.getBalance() + monto));
             usuarioRepository.save(usuario);
 
+            // Registrar el movimiento
+            Movimiento movimiento = new Movimiento();
+            movimiento.setUsuario(usuario);
+            movimiento.setDescripcion("Depósito");
+            movimiento.setMonto(monto);
+            movimientoRepository.save(movimiento);
+
             // Actualizar el balance en la sesión
             session.setAttribute("usuario", usuario);
             model.addAttribute("nombre", usuario.getNombre());
@@ -99,6 +106,13 @@ public class MiController {
                 usuario.setBalance((int) (usuario.getBalance() - monto));
                 usuarioRepository.save(usuario);
 
+                // Registrar el movimiento
+                Movimiento movimiento = new Movimiento();
+                movimiento.setUsuario(usuario);
+                movimiento.setDescripcion("Retiro");
+                movimiento.setMonto(monto);
+                movimientoRepository.save(movimiento);
+
                 // Actualizar el balance en la sesión
                 session.setAttribute("usuario", usuario);
                 model.addAttribute("nombre", usuario.getNombre());
@@ -116,8 +130,17 @@ public class MiController {
     }
 
     @GetMapping("/realizarTransferencia")
-    public String realizarTransferencia() {
-        return "transferencia";
+    public String realizarTransferencia(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+
+        if (usuario != null) {
+            List<Usuario> contactos = usuarioRepository.findAll(); // Obtener todos los usuarios como contactos
+            model.addAttribute("contactos", contactos);
+            return "transferencia";
+        } else {
+            return "redirect:/";
+        }
     }
 
     @PostMapping("/realizarTransferencia")
@@ -139,6 +162,19 @@ public class MiController {
                     // Actualizar el balance del destinatario
                     destinatario.setBalance((int) (destinatario.getBalance() + monto));
                     usuarioRepository.save(destinatario);
+
+                    // Registrar los movimientos
+                    Movimiento movimientoSalida = new Movimiento();
+                    movimientoSalida.setUsuario(usuario);
+                    movimientoSalida.setDescripcion("Transferencia a " + destinatario.getNombre());
+                    movimientoSalida.setMonto(-monto);
+                    movimientoRepository.save(movimientoSalida);
+
+                    Movimiento movimientoEntrada = new Movimiento();
+                    movimientoEntrada.setUsuario(destinatario);
+                    movimientoEntrada.setDescripcion("Transferencia de " + usuario.getNombre());
+                    movimientoEntrada.setMonto(monto);
+                    movimientoRepository.save(movimientoEntrada);
 
                     // Actualizar la sesión del usuario
                     session.setAttribute("usuario", usuario);

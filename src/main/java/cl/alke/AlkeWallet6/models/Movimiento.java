@@ -1,6 +1,7 @@
 package cl.alke.AlkeWallet6.models;
 
 import jakarta.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Movimiento {
@@ -10,14 +11,14 @@ public class Movimiento {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
     private String descripcion;
-    private Double monto;
+    private double monto;
+    private Date fecha = new Date();
 
     // Getters y setters
-
     public Long getId() {
         return id;
     }
@@ -42,11 +43,19 @@ public class Movimiento {
         this.descripcion = descripcion;
     }
 
-    public Double getMonto() {
+    public double getMonto() {
         return monto;
     }
 
-    public void setMonto(Double monto) {
+    public void setMonto(double monto) {
         this.monto = monto;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 }
